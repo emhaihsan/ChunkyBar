@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+/* ─── ChunkyBar Design System (Light Theme) ─── */
+
+:root {
+  /* Color Palette */
+  --white: #F0F0F0;
+  --orange-muda: #FFD18C;
+  --orange-semi: #FFB84D;
+  --primary-orange: #FF8A65;
+  --redish-orange: #FF6B4A;
+  --black: #1A1A1A;
+
+  /* Derived — Light Theme */
+  --background: #FAFAFA;
+  --foreground: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-bg-hover: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(250, 250, 250, 0.78);
+  --glass-border: rgba(0, 0, 0, 0.06);
+
+  /* Gradients */
+  --gradient-orange: linear-gradient(135deg, #FFB84D 0%, #FF8A65 40%, #FF6B4A 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(255, 138, 101, 0.08) 0%, transparent 70%);
+  --gradient-hero-orb1: radial-gradient(circle, rgba(255, 184, 77, 0.18) 0%, transparent 60%);
+  --gradient-hero-orb2: radial-gradient(circle, rgba(255, 107, 74, 0.14) 0%, transparent 60%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-white: var(--white);
+  --color-orange-muda: var(--orange-muda);
+  --color-orange-semi: var(--orange-semi);
+  --color-primary-orange: var(--primary-orange);
+  --color-redish-orange: var(--redish-orange);
+  --color-black: var(--black);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-bg-hover: var(--card-bg-hover);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --font-sans: var(--font-inter);
+}
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Typography Scale ─── */
+.text-h1 {
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  line-height: 0.88;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.text-h2 {
+  font-size: clamp(2.25rem, 5vw, 4.375rem);
+  line-height: 0.83;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-h3 {
+  font-size: clamp(1.5rem, 3.5vw, 3.125rem);
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.text-p1 {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-p2 {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: var(--card-bg-hover);
+  border-color: rgba(255, 138, 101, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -15px rgba(255, 138, 101, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Glass Navbar ─── */
+.glass-nav {
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+}
+
+/* ─── Gradient Button ─── */
+.btn-primary {
+  background: var(--gradient-orange);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px -8px rgba(255, 138, 101, 0.45);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 500;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 138, 101, 0.5);
+  background: rgba(255, 138, 101, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ─── Animated Orbs ─── */
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+
+  50% {
+    transform: translate(-10px, 20px) scale(0.95);
+  }
+
+  75% {
+    transform: translate(-30px, -10px) scale(1.02);
+  }
+}
+
+@keyframes float-slower {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+
+  66% {
+    transform: translate(20px, -30px) scale(0.96);
+  }
+}
+
+.orb-1 {
+  animation: float-slow 18s ease-in-out infinite;
+}
+
+.orb-2 {
+  animation: float-slower 22s ease-in-out infinite;
+}
+
+/* ─── Section Divider Glow ─── */
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 138, 101, 0.2), transparent);
+}
+
+/* ─── Feature Icon Container ─── */
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 184, 77, 0.18), rgba(255, 107, 74, 0.18));
+  color: var(--primary-orange);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ─── Page Shell (for inner pages) ─── */
+.page-shell {
+  min-height: 100vh;
+  padding-top: 5rem;
+}
