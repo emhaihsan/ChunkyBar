@@ -1,3 +1,7 @@
+"use client";
+
+import { useScrollReveal } from "../hooks/useScrollReveal";
+
 const features = [
     {
         icon: (
@@ -70,11 +74,17 @@ const features = [
 ];
 
 export default function Features() {
+    const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+
     return (
         <section id="features" className="relative py-28 section-glow">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-16">
+                <div
+                    ref={headerRef}
+                    className={`text-center mb-16 transition-all duration-700 ease-out ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                        }`}
+                >
                     <p className="text-p2 uppercase tracking-widest text-primary-orange mb-3">
                         Features
                     </p>
@@ -89,20 +99,30 @@ export default function Features() {
 
                 {/* Feature Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {features.map((feature) => (
-                        <div
-                            key={feature.title}
-                            className="glass-card p-7 flex flex-col gap-4"
-                        >
-                            <div className="feature-icon">{feature.icon}</div>
-                            <h3 className="text-h4 text-foreground">{feature.title}</h3>
-                            <p className="text-p2 text-text-secondary leading-relaxed">
-                                {feature.description}
-                            </p>
-                        </div>
+                    {features.map((feature, i) => (
+                        <FeatureCard key={feature.title} feature={feature} index={i} />
                     ))}
                 </div>
             </div>
         </section>
+    );
+}
+
+function FeatureCard({ feature, index }: { feature: typeof features[number]; index: number }) {
+    const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+
+    return (
+        <div
+            ref={ref}
+            className={`glass-card p-7 flex flex-col gap-4 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+        >
+            <div className="feature-icon">{feature.icon}</div>
+            <h3 className="text-h4 text-foreground">{feature.title}</h3>
+            <p className="text-p2 text-text-secondary leading-relaxed">
+                {feature.description}
+            </p>
+        </div>
     );
 }

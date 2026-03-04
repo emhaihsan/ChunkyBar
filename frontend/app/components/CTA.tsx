@@ -1,9 +1,19 @@
+"use client";
+
+import { useScrollReveal } from "../hooks/useScrollReveal";
+
 export default function CTA() {
+    const { ref, isVisible } = useScrollReveal();
+
     return (
         <section id="cta" className="relative py-28">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div
-                    className="relative overflow-hidden rounded-3xl p-12 sm:p-16 text-center"
+                    ref={ref}
+                    className={`relative overflow-hidden rounded-3xl p-12 sm:p-16 text-center transition-all duration-800 ease-out ${isVisible
+                            ? "opacity-100 translate-y-0 scale-100"
+                            : "opacity-0 translate-y-10 scale-[0.97]"
+                        }`}
                     style={{
                         background:
                             "linear-gradient(135deg, rgba(255,184,77,0.10) 0%, rgba(255,138,101,0.08) 40%, rgba(255,107,74,0.06) 100%)",

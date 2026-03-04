@@ -1,10 +1,21 @@
+"use client";
+
 import Image from "next/image";
+import { useRef, useEffect, useState } from "react";
 
 export default function Hero() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        setVisible(true);
+    }, []);
+
     return (
         <section
+            ref={sectionRef}
             id="hero"
-            className="relative min-h-screen flex items-center justify-center overflow-hidden pt-18"
+            className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16"
         >
             {/* Animated Background Orbs */}
             <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -22,77 +33,110 @@ export default function Hero() {
                 />
             </div>
 
-            <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8 text-center">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white/60 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-sm">
-                    <Image
-                        src="/logo-black.png"
-                        alt=""
-                        width={20}
-                        height={20}
-                        className="h-5 w-auto"
-                    />
-                    <span className="text-p2 text-text-secondary">
-                        Built on Hedera Hashgraph
-                    </span>
-                </div>
-
-                {/* Headline */}
-                <h1 className="text-h1 text-foreground mb-6 max-w-4xl mx-auto">
-                    Cross-Chain Payments,{" "}
-                    <span
-                        className="bg-clip-text text-transparent"
-                        style={{ backgroundImage: "var(--gradient-orange)" }}
+            <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 w-full">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                    {/* Left Content — 2/3 */}
+                    <div
+                        className={`flex-[2] text-center lg:text-left transition-all duration-1000 ease-out ${visible
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-8"
+                            }`}
                     >
-                        One Transaction
-                    </span>
-                </h1>
+                        {/* Badge */}
+                        <div className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white/60 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-sm">
+                            <Image
+                                src="/logoblack.webp"
+                                alt=""
+                                width={20}
+                                height={20}
+                                className="h-5 w-auto"
+                            />
+                            <span className="text-p2 text-text-secondary">
+                                Built on Hedera Hashgraph
+                            </span>
+                        </div>
 
-                {/* Subheadline */}
-                <p className="text-p1 text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Swap, bridge, and settle from Hedera to any EVM network in a single
-                    atomic operation. Non-custodial, auditable, and institutional-ready.
-                </p>
-
-                {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="/swap" className="btn-primary text-base px-8 py-3.5">
-                        Get Started
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                    <a href="#features" className="btn-secondary text-base px-8 py-3.5">
-                        Explore Features
-                    </a>
-                </div>
-
-                {/* Stats Row */}
-                <div className="mt-20 grid grid-cols-3 gap-8 max-w-xl mx-auto">
-                    {[
-                        { value: "< 5 min", label: "Settlement Time" },
-                        { value: "~0.75%", label: "Total Fees" },
-                        { value: "100%", label: "Non-Custodial" },
-                    ].map((stat) => (
-                        <div key={stat.label} className="text-center">
-                            <div
-                                className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent"
+                        {/* Headline */}
+                        <h1 className="text-h1 text-foreground mb-6 max-w-4xl">
+                            Cross-Chain Payments,{" "}
+                            <span
+                                className="bg-clip-text text-transparent"
                                 style={{ backgroundImage: "var(--gradient-orange)" }}
                             >
-                                {stat.value}
-                            </div>
-                            <div className="text-p2 text-text-tertiary mt-1">{stat.label}</div>
+                                One Transaction
+                            </span>
+                        </h1>
+
+                        {/* Subheadline */}
+                        <p className="text-p1 text-text-secondary max-w-xl mb-10 leading-relaxed">
+                            Swap, bridge, and settle from Hedera to any EVM network in a single
+                            atomic operation. Non-custodial, auditable, and institutional-ready.
+                        </p>
+
+                        {/* CTAs */}
+                        <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+                            <a href="/swap" className="btn-primary text-base px-8 py-3.5">
+                                Get Started
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <a href="#features" className="btn-secondary text-base px-8 py-3.5">
+                                Explore Features
+                            </a>
                         </div>
-                    ))}
+
+                        {/* Stats Row */}
+                        <div className="mt-16 grid grid-cols-3 gap-8 max-w-md">
+                            {[
+                                { value: "< 5 min", label: "Settlement Time" },
+                                { value: "~0.75%", label: "Total Fees" },
+                                { value: "100%", label: "Non-Custodial" },
+                            ].map((stat) => (
+                                <div key={stat.label} className="text-center lg:text-left">
+                                    <div
+                                        className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent"
+                                        style={{ backgroundImage: "var(--gradient-orange)" }}
+                                    >
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-p2 text-text-tertiary mt-1">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right Content — 1/3 Video */}
+                    <div
+                        className={`flex-[1] w-full max-w-md lg:max-w-none transition-all duration-1000 ease-out delay-300 ${visible
+                                ? "opacity-100 translate-x-0 scale-100"
+                                : "opacity-0 translate-x-12 scale-95"
+                            }`}
+                    >
+                        <div className="hero-video-container relative rounded-3xl overflow-hidden shadow-2xl border border-black/8">
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-auto block"
+                                poster="/logo3d.webp"
+                            >
+                                <source src="/herovideo.mp4" type="video/mp4" />
+                            </video>
+                            {/* Subtle gradient overlay at bottom */}
+                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+                        </div>
+                    </div>
                 </div>
             </div>
 

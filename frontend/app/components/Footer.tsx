@@ -1,15 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export default function Footer() {
+    const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+
     return (
         <footer id="about" className="relative border-t border-black/5 py-16">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div
+                ref={ref}
+                className={`mx-auto max-w-7xl px-6 lg:px-8 transition-all duration-800 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                    }`}
+            >
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <div className="flex items-center gap-3 mb-4">
                             <Image
-                                src="/logo-black.png"
+                                src="/logoblack.webp"
                                 alt="ChunkyBar"
                                 width={32}
                                 height={32}

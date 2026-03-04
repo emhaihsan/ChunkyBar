@@ -1,4 +1,7 @@
+"use client";
+
 import Navbar from "../components/Navbar";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const chains = [
     { name: "Ethereum", icon: "⟠" },
@@ -16,7 +19,7 @@ const routeSteps = [
 
 export default function SwapPage() {
     return (
-        <>
+        <ProtectedRoute>
             <Navbar />
             <div className="page-shell">
                 <div className="mx-auto max-w-lg px-6 py-12">
@@ -127,8 +130,8 @@ export default function SwapPage() {
                                     <button
                                         key={chain.name}
                                         className={`rounded-xl border px-3 py-2.5 text-center transition-all duration-200 ${i === 0
-                                                ? "border-primary-orange/40 bg-primary-orange/8 text-foreground shadow-sm"
-                                                : "border-black/6 bg-white text-text-secondary hover:border-primary-orange/30"
+                                            ? "border-primary-orange/40 bg-primary-orange/8 text-foreground shadow-sm"
+                                            : "border-black/6 bg-white text-text-secondary hover:border-primary-orange/30"
                                             }`}
                                     >
                                         <span className="text-lg block">{chain.icon}</span>
@@ -227,6 +230,6 @@ export default function SwapPage() {
                     </div>
                 </div>
             </div>
-        </>
+        </ProtectedRoute>
     );
 }

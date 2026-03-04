@@ -251,3 +251,69 @@ body {
   min-height: 100vh;
   padding-top: 5rem;
 }
+
+/* ─── Hero Video ─── */
+.hero-video-container {
+  box-shadow: 0 25px 80px -12px rgba(255, 138, 101, 0.20), 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.4s ease;
+}
+
+.hero-video-container:hover {
+  box-shadow: 0 30px 90px -12px rgba(255, 138, 101, 0.28), 0 12px 32px rgba(0, 0, 0, 0.10);
+}
+
+/* ─── Wallet Option Buttons ─── */
+.wallet-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--background);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wallet-option:hover:not(:disabled) {
+  border-color: rgba(255, 138, 101, 0.3);
+  background: rgba(255, 138, 101, 0.04);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px -4px rgba(255, 138, 101, 0.12);
+}
+
+.wallet-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wallet-option-connecting {
+  border-color: rgba(255, 138, 101, 0.4) !important;
+  background: rgba(255, 138, 101, 0.06) !important;
+}
+
+.wallet-icon-wrap {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+/* ─── Wallet Badge (Navbar) ─── */
+.wallet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}

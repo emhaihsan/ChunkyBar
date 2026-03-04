@@ -1,4 +1,10 @@
+"use client";
+
+import { useScrollReveal } from "../hooks/useScrollReveal";
+
 export default function HowItWorks() {
+    const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+
     const steps = [
         {
             number: "01",
@@ -30,7 +36,11 @@ export default function HowItWorks() {
         <section id="how-it-works" className="relative py-28 section-glow">
             <div className="mx-auto max-w-5xl px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-16">
+                <div
+                    ref={headerRef}
+                    className={`text-center mb-16 transition-all duration-700 ease-out ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                        }`}
+                >
                     <p className="text-p2 uppercase tracking-widest text-primary-orange mb-3">
                         How It Works
                     </p>
@@ -55,33 +65,43 @@ export default function HowItWorks() {
                     />
 
                     <div className="flex flex-col gap-8">
-                        {steps.map((step) => (
-                            <div
-                                key={step.number}
-                                className="relative flex gap-6 sm:gap-8 items-start group"
-                            >
-                                {/* Step Number */}
-                                <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold border border-black/8 bg-[#FAFAFA] group-hover:border-primary-orange/40 transition-colors duration-300 shadow-sm">
-                                    <span
-                                        className="bg-clip-text text-transparent"
-                                        style={{ backgroundImage: "var(--gradient-orange)" }}
-                                    >
-                                        {step.number}
-                                    </span>
-                                </div>
-
-                                {/* Content Card */}
-                                <div className="glass-card flex-1 p-6">
-                                    <h3 className="text-h4 text-foreground mb-2">{step.title}</h3>
-                                    <p className="text-p2 text-text-secondary leading-relaxed">
-                                        {step.description}
-                                    </p>
-                                </div>
-                            </div>
+                        {steps.map((step, i) => (
+                            <StepCard key={step.number} step={step} index={i} />
                         ))}
                     </div>
                 </div>
             </div>
         </section>
+    );
+}
+
+function StepCard({ step, index }: { step: { number: string; title: string; description: string }; index: number }) {
+    const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
+    return (
+        <div
+            ref={ref}
+            className={`relative flex gap-6 sm:gap-8 items-start group transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
+            style={{ transitionDelay: `${index * 150}ms` }}
+        >
+            {/* Step Number */}
+            <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold border border-black/8 bg-[#FAFAFA] group-hover:border-primary-orange/40 transition-colors duration-300 shadow-sm">
+                <span
+                    className="bg-clip-text text-transparent"
+                    style={{ backgroundImage: "var(--gradient-orange)" }}
+                >
+                    {step.number}
+                </span>
+            </div>
+
+            {/* Content Card */}
+            <div className="glass-card flex-1 p-6">
+                <h3 className="text-h4 text-foreground mb-2">{step.title}</h3>
+                <p className="text-p2 text-text-secondary leading-relaxed">
+                    {step.description}
+                </p>
+            </div>
+        </div>
     );
 }
