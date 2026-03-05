@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ChunkyBar — Cross-Chain Payments for Hedera",
+  title: "ChunkyBar: Cross-Chain Payments for Hedera",
   description:
     "Non-custodial, orchestrated cross-chain payment protocol. Swap, bridge, and settle in one atomic transaction from Hedera to any EVM network.",
 };

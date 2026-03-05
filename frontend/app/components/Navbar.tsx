@@ -23,13 +23,9 @@ export default function Navbar() {
         { label: "Dashboard", href: "/dashboard" },
     ];
 
-    // On landing page: show landing links (+ app links if connected)
+    // On landing page: only show landing links (no app links, handled by hero CTA)
     // On inner pages: show app links only
-    const navLinks = isLandingPage
-        ? isConnected
-            ? [...landingLinks, ...appLinks]
-            : landingLinks
-        : appLinks;
+    const navLinks = isLandingPage ? landingLinks : appLinks;
 
     const isActiveLink = (href: string) => {
         if (href.startsWith("/#")) return false;
@@ -61,8 +57,8 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm font-medium transition-colors duration-200 ${isActiveLink(link.href)
-                                        ? "text-primary-orange"
-                                        : "text-text-secondary hover:text-foreground"
+                                    ? "text-primary-orange"
+                                    : "text-text-secondary hover:text-foreground"
                                     }`}
                             >
                                 {link.label}
@@ -139,8 +135,8 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm font-medium transition-colors ${isActiveLink(link.href)
-                                        ? "text-primary-orange"
-                                        : "text-text-secondary hover:text-foreground"
+                                    ? "text-primary-orange"
+                                    : "text-text-secondary hover:text-foreground"
                                     }`}
                                 onClick={() => setMobileOpen(false)}
                             >

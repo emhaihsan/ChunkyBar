@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "./AuthProvider";
 
 export default function Hero() {
-    const sectionRef = useRef<HTMLElement>(null);
     const [visible, setVisible] = useState(false);
+    const { isConnected, openConnectModal } = useAuth();
 
     useEffect(() => {
         setVisible(true);
@@ -13,7 +14,6 @@ export default function Hero() {
 
     return (
         <section
-            ref={sectionRef}
             id="hero"
             className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16"
         >
@@ -38,8 +38,8 @@ export default function Hero() {
                     {/* Left Content — 2/3 */}
                     <div
                         className={`flex-[2] text-center lg:text-left transition-all duration-1000 ease-out ${visible
-                                ? "opacity-100 translate-y-0"
-                                : "opacity-0 translate-y-8"
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-8"
                             }`}
                     >
                         {/* Badge */}
@@ -75,21 +75,21 @@ export default function Hero() {
 
                         {/* CTAs */}
                         <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
-                            <a href="/swap" className="btn-primary text-base px-8 py-3.5">
-                                Get Started
-                                <svg
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </a>
+                            {isConnected ? (
+                                <a href="/dashboard" className="btn-primary text-base px-8 py-3.5">
+                                    Go to Dashboard
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            ) : (
+                                <button onClick={openConnectModal} className="btn-primary text-base px-8 py-3.5">
+                                    Get Started
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            )}
                             <a href="#features" className="btn-secondary text-base px-8 py-3.5">
                                 Explore Features
                             </a>
@@ -115,26 +115,25 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Right Content — 1/3 Video */}
+                    {/* Right Content — 1/3 Image */}
                     <div
-                        className={`flex-[1] w-full max-w-md lg:max-w-none transition-all duration-1000 ease-out delay-300 ${visible
-                                ? "opacity-100 translate-x-0 scale-100"
-                                : "opacity-0 translate-x-12 scale-95"
+                        className={`flex-[1] w-full max-w-md lg:max-w-none flex items-center justify-center transition-all duration-1000 ease-out delay-300 ${visible
+                            ? "opacity-100 translate-x-0 scale-100"
+                            : "opacity-0 translate-x-12 scale-95"
                             }`}
                     >
-                        <div className="hero-video-container relative rounded-3xl overflow-hidden shadow-2xl border border-black/8">
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-auto block"
-                                poster="/logo3d.webp"
-                            >
-                                <source src="/herovideo.mp4" type="video/mp4" />
-                            </video>
-                            {/* Subtle gradient overlay at bottom */}
-                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+                        <div className="hero-image-container relative">
+                            <Image
+                                src="/logo-hero.webp"
+                                alt="ChunkyBar 3D Logo"
+                                width={500}
+                                height={500}
+                                priority
+                                className="w-full h-auto max-w-[420px] lg:max-w-[500px] drop-shadow-2xl"
+                                style={{
+                                    filter: "drop-shadow(0 30px 60px rgba(255, 138, 101, 0.25))",
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

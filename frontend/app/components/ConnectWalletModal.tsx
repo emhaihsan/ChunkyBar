@@ -2,6 +2,7 @@
 
 import { useAuth } from "./AuthProvider";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const wallets = [
     {
@@ -50,6 +51,7 @@ export default function ConnectWalletModal() {
     const { showConnectModal, closeConnectModal, connect } = useAuth();
     const [connecting, setConnecting] = useState<string | null>(null);
     const [animateIn, setAnimateIn] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         if (showConnectModal) {
@@ -90,6 +92,8 @@ export default function ConnectWalletModal() {
         setConnecting(walletId);
         setTimeout(() => {
             connect(walletId);
+            closeConnectModal();
+            router.push("/dashboard");
         }, 800);
     };
 
@@ -107,8 +111,8 @@ export default function ConnectWalletModal() {
             {/* Modal */}
             <div
                 className={`relative z-10 w-full max-w-md mx-4 transition-all duration-300 ease-out ${animateIn
-                        ? "scale-100 translate-y-0 opacity-100"
-                        : "scale-95 translate-y-4 opacity-0"
+                    ? "scale-100 translate-y-0 opacity-100"
+                    : "scale-95 translate-y-4 opacity-0"
                     }`}
             >
                 {/* Close Button */}
